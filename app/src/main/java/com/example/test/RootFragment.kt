@@ -23,7 +23,7 @@ class RootFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_root, container, false)
+        val view = inflater.inflate(R.layout.fragment_root, container, false)
         view.weatherBTN?.setOnClickListener {
             fragmentManager
                 ?.beginTransaction()
