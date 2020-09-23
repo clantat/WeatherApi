@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">test</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="GismeteoApiKey">8364d75b7c2dcf33ee2225f9d89a7286</string>
+    <string name="ShowWeatherButton">Show weather</string>
 </resources>

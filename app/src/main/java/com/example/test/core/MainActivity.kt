@@ -1,8 +1,9 @@
-package com.example.test
+package com.example.test.core
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.test.R
+import com.example.test.presentation.fragments.RootFragment
 
 private const val TAG = "MAIN ACTIVITY"
 

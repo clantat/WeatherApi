@@ -1,4 +1,4 @@
-package com.example.test
+package com.example.test.di.scope
 
 import javax.inject.Scope
 

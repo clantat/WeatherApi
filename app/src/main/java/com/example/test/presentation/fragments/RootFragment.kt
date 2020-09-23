@@ -1,15 +1,13 @@
-package com.example.test
+package com.example.test.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.test.R
 import kotlinx.android.synthetic.main.fragment_root.view.*
 
-
-private const val TAG = "ROOT FRAGMENT TAG"
 
 class RootFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {

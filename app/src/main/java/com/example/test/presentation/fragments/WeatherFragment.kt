@@ -1,4 +1,4 @@
-package com.example.test
+package com.example.test.presentation.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -6,12 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.example.test.R
+import com.example.test.core.App
+import com.example.test.presentation.presenters.WeatherPresenter
+import com.example.test.presentation.views.WeatherView
 import kotlinx.android.synthetic.main.fragment_weather.view.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -20,7 +19,6 @@ import javax.inject.Provider
 
 
 private const val CITY_NUMBER = "CITY_NUMBER"
-private const val TAG = "WEATHER FRAGMENT"
 
 class WeatherFragment : MvpAppCompatFragment(), WeatherView {
 
@@ -30,7 +28,6 @@ class WeatherFragment : MvpAppCompatFragment(), WeatherView {
     @InjectPresenter
     lateinit var weatherPresenter: WeatherPresenter
 
-    //TODO ПОПРОБОВАТЬ ПОМЕНЯТЬ НА https://habr.com/ru/post/506806/  private val presenter by moxyPresenter { presenterProvider.get()}
     private var cityNumber: String? = null
     private lateinit var degreesTextView: TextView
     private lateinit var humidityTextView: TextView
@@ -66,6 +63,10 @@ class WeatherFragment : MvpAppCompatFragment(), WeatherView {
         return view
     }
 
+    override fun onDestroy() {
+        App.instance.clearWeatherFragmentComponent()
+        super.onDestroy()
+    }
 
     companion object {
         @JvmStatic
