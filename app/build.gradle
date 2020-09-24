@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.test"
+        applicationId "com.clantat.test"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -41,7 +41,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
@@ -51,7 +51,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
     //rxandroid & rxkotlin
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation 'io.reactivex.rxjava3:rxkotlin:3.0.0'
@@ -65,12 +65,13 @@ dependencies {
     implementation "com.github.moxy-community:moxy-androidx:$moxyVersion"
     implementation "com.github.moxy-community:moxy-material:$moxyVersion"
     // Dagger 2
-    implementation 'com.google.dagger:dagger:2.20'
-    implementation 'com.google.dagger:dagger-android:2.20'
-    implementation 'com.google.dagger:dagger-android-support:2.20'
-    kapt 'com.google.dagger:dagger-android-support:2.20'
-    kapt 'com.google.dagger:dagger-android-processor:2.20'
-    kapt 'com.google.dagger:dagger-compiler:2.20'
+    def daggerVersion = '2.29.1'
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt 'com.google.dagger:dagger-android-support:2.29.1'
+    kapt 'com.google.dagger:dagger-android-processor:2.29.1'
+    kapt 'com.google.dagger:dagger-compiler:2.29.1'
 
 
 }
