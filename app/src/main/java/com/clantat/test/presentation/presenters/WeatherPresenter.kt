@@ -1,7 +1,5 @@
 package com.clantat.test.presentation.presenters
 
-import android.util.Log
-import com.clantat.test.R
 import com.clantat.test.domain.interactors.WeatherInteractor
 import com.clantat.test.presentation.views.WeatherView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -11,7 +9,6 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 import javax.inject.Inject
 
-private const val TAG = "WEATHER PRESENTER"
 
 @InjectViewState
 class WeatherPresenter @Inject constructor(private val weatherInteractor: WeatherInteractor) :
@@ -19,13 +16,13 @@ class WeatherPresenter @Inject constructor(private val weatherInteractor: Weathe
     private var temp: String? = null
     private var humidity: String? = null
     private var disposable: Disposable? = null
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         //viewState.requestContactsPermission()
     }
 
     fun start() {
-        Log.i(TAG, "start: before " + R.string.GismeteoApiKey)
         disposable = weatherInteractor.getWeatherEntity()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())

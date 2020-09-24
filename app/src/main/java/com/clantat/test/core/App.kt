@@ -1,16 +1,21 @@
 package com.clantat.test.core
 
 import android.app.Application
-import com.clantat.test.di.components.AppComponent
-import com.clantat.test.di.components.DaggerAppComponent
-import com.clantat.test.di.components.WeatherFragmentComponent
+import com.clantat.test.di.components.*
 import com.clantat.test.di.modules.AppModule
 import com.clantat.test.di.modules.WeatherModule
+import ru.terrakok.cicerone.Cicerone
+import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
 class App : Application() {
 
+    @Inject
+    lateinit var cicerone: Cicerone<Router>
     lateinit var appComponent: AppComponent
+    private var mainActivityComponent: MainActivityComponent? = null
     private var weatherFragmentComponent: WeatherFragmentComponent? = null
+    private var rootFragmentComponent: RootFragmentComponent? = null
 
     companion object {
         lateinit var instance: App
@@ -23,9 +28,29 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerAppComponent.builder()
+        appComponent = DaggerAppComponent
+            .builder()
             .appModule(AppModule(this))
             .build()
+            .apply { inject(this@App) }
+    }
+
+    fun plusMainActivityComponent(): MainActivityComponent {
+        return mainActivityComponent
+            ?: appComponent.plusMainActivityComponent()
+    }
+
+    fun clearMainActivityComponent() {
+        mainActivityComponent = null
+    }
+
+    fun plusRootFragmentComponent(): RootFragmentComponent {
+        return rootFragmentComponent
+            ?: appComponent.plusRootFragmentComponent()
+    }
+
+    fun clearRootFragmentComponent() {
+        rootFragmentComponent = null
     }
 
     fun plusWeatherFragmentComponent(): WeatherFragmentComponent {
@@ -36,5 +61,6 @@ class App : Application() {
     fun clearWeatherFragmentComponent() {
         weatherFragmentComponent = null
     }
+
 
 }

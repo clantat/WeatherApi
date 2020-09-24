@@ -3,21 +3,37 @@ package com.clantat.test.core
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.clantat.test.R
-import com.clantat.test.presentation.fragments.RootFragment
+import ru.terrakok.cicerone.android.support.SupportAppNavigator
+import javax.inject.Inject
 
-private const val TAG = "MAIN ACTIVITY"
 
 class MainActivity : AppCompatActivity() {
-    //TODO добавить cicerone router
+
+    @Inject
+    lateinit var app: App
+    private val navigator = SupportAppNavigator(this, R.id.root_container)
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        App.instance.appComponent.inject(this)
+        App.instance.plusMainActivityComponent().inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.root_container, RootFragment.newInstance(), "RootFragment")
-                .commit()
+            app.cicerone.router.newRootScreen(RootScreen())
         }
+    }
+
+    override fun onResumeFragments() {
+        super.onResumeFragments()
+        app.cicerone.navigatorHolder.setNavigator(navigator)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        app.cicerone.navigatorHolder.removeNavigator()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        App.instance.clearMainActivityComponent()
     }
 }

@@ -72,6 +72,8 @@ dependencies {
     kapt 'com.google.dagger:dagger-android-support:2.29.1'
     kapt 'com.google.dagger:dagger-android-processor:2.29.1'
     kapt 'com.google.dagger:dagger-compiler:2.29.1'
+    // cicerone
+    implementation 'ru.terrakok.cicerone:cicerone:5.1.1'
 
 
 }
