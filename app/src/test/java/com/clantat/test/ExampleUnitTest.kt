@@ -1,4 +1,4 @@
-package com.example.test
+package com.clantat.test
 
 import org.junit.Test
 
