@@ -33,7 +33,7 @@ class WeatherFragment : MvpAppCompatFragment(), WeatherView {
     private lateinit var humidityTextView: TextView
 
     @ProvidePresenter
-    fun provideWeatherPresenter(): WeatherPresenter {
+    fun providePresenter(): WeatherPresenter {
         return presenterProvider.get()
     }
 
