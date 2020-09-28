@@ -3,6 +3,8 @@ package com.clantat.test.core
 import android.app.Application
 import com.clantat.test.di.components.*
 import com.clantat.test.di.modules.AppModule
+import com.clantat.test.di.modules.RootModule
+import com.clantat.test.di.modules.SettingsModule
 import com.clantat.test.di.modules.WeatherModule
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
@@ -14,8 +16,9 @@ class App : Application() {
     lateinit var cicerone: Cicerone<Router>
     lateinit var appComponent: AppComponent
     private var mainActivityComponent: MainActivityComponent? = null
-    private var weatherFragmentComponent: WeatherFragmentComponent? = null
     private var rootFragmentComponent: RootFragmentComponent? = null
+    private var settingsFragmentComponent: SettingsFragmentComponent? = null
+    private var weatherFragmentComponent: WeatherFragmentComponent? = null
 
     companion object {
         lateinit var instance: App
@@ -46,12 +49,22 @@ class App : Application() {
 
     fun plusRootFragmentComponent(): RootFragmentComponent {
         return rootFragmentComponent
-            ?: appComponent.plusRootFragmentComponent()
+            ?: appComponent.plusRootFragmentComponent(RootModule())
     }
 
     fun clearRootFragmentComponent() {
         rootFragmentComponent = null
     }
+
+    fun plusSettingsFragmentComponent(): SettingsFragmentComponent {
+        return settingsFragmentComponent
+            ?: appComponent.plusSettingFragmentComponent(SettingsModule())
+    }
+
+    fun clearSettingsFragmentComponent() {
+        settingsFragmentComponent = null
+    }
+
 
     fun plusWeatherFragmentComponent(): WeatherFragmentComponent {
         return weatherFragmentComponent
