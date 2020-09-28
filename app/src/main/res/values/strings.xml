@@ -4,4 +4,6 @@
     <string name="GismeteoApiKey">8364d75b7c2dcf33ee2225f9d89a7286</string>
     <string name="ShowWeatherButton">Show weather</string>
     <string name="settings">Settings</string>
+    <string name="changeLightTheme">Change light theme</string>
+    <string name="changeDarkTheme">Change dark theme</string>
 </resources>

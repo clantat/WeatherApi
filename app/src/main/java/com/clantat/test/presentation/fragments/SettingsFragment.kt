@@ -6,18 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import com.clantat.test.R
 import com.clantat.test.core.App
 import com.clantat.test.presentation.presenters.SettingsPresenter
 import com.clantat.test.presentation.views.SettingsView
-import kotlinx.android.synthetic.main.fragment_root.view.*
+import kotlinx.android.synthetic.main.fragment_settings.view.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
+private const val TAG: String = "SettingsFragment"
+private const val THEME_MODE = "themeMode"
+
 class SettingsFragment : MvpAppCompatFragment(), SettingsView {
+    lateinit var changeThemeBtn: Button
+    private var themeMode: String? = null
 
     @Inject
     lateinit var presenterProvider: Provider<SettingsPresenter>
@@ -38,6 +46,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            themeMode = it.getString(THEME_MODE)
         }
     }
 
@@ -46,7 +55,31 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
-
+        changeThemeBtn = view.changeThemeBtn
+        when (AppCompatDelegate.getDefaultNightMode()) {
+            MODE_NIGHT_NO -> {
+                changeThemeBtn.text = resources.getString(R.string.changeLightTheme)
+            }
+            MODE_NIGHT_YES -> {
+                changeThemeBtn.text = resources.getString(R.string.changeDarkTheme)
+            }
+            AppCompatDelegate.MODE_NIGHT_UNSPECIFIED -> {
+                changeThemeBtn.text = resources.getString(R.string.changeLightTheme)
+            }
+        }
+        changeThemeBtn.setOnClickListener {
+            when (AppCompatDelegate.getDefaultNightMode()) {
+                MODE_NIGHT_NO -> {
+                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+                }
+                MODE_NIGHT_YES -> {
+                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
+                }
+                AppCompatDelegate.MODE_NIGHT_UNSPECIFIED -> {
+                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+                }
+            }
+        }
         return view
     }
 

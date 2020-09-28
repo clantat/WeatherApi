@@ -14,7 +14,7 @@ class App : Application() {
 
     @Inject
     lateinit var cicerone: Cicerone<Router>
-    lateinit var appComponent: AppComponent
+    private lateinit var appComponent: AppComponent
     private var mainActivityComponent: MainActivityComponent? = null
     private var rootFragmentComponent: RootFragmentComponent? = null
     private var settingsFragmentComponent: SettingsFragmentComponent? = null

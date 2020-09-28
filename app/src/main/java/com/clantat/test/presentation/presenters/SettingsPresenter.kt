@@ -10,6 +10,7 @@ class SettingsPresenter : MvpPresenter<SettingsView>() {
     }
 
     fun start() {
+        //TODO добавить в Базу данных настройки и проверять их при запуске приложения
     }
 
 

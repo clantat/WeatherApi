@@ -6,12 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.Fragment
 import com.clantat.test.R
 import com.clantat.test.core.App
-import com.clantat.test.core.WeatherScreen
 import com.clantat.test.presentation.presenters.RootPresenter
-import com.clantat.test.presentation.presenters.WeatherPresenter
 import com.clantat.test.presentation.views.RootView
 import kotlinx.android.synthetic.main.fragment_root.view.*
 import moxy.MvpAppCompatFragment
@@ -23,13 +20,14 @@ import javax.inject.Provider
 
 class RootFragment : MvpAppCompatFragment(), RootView {
 
-    @Inject
-    lateinit var presenterProvider: Provider<RootPresenter>
-    @InjectPresenter
-    lateinit var rootPresenter: RootPresenter
-
     private lateinit var weatherBtn: Button
     private lateinit var settingsBtn: Button
+
+    @Inject
+    lateinit var presenterProvider: Provider<RootPresenter>
+
+    @InjectPresenter
+    lateinit var rootPresenter: RootPresenter
 
     @ProvidePresenter
     fun providePresenter(): RootPresenter {
@@ -54,15 +52,16 @@ class RootFragment : MvpAppCompatFragment(), RootView {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_root, container, false)
         weatherBtn = view.weatherBTN
-        if(this::weatherBtn.isInitialized)
-        weatherBtn.setOnClickListener {
-            rootPresenter.goToWeather()
-        }
+        if (this::weatherBtn.isInitialized)
+            weatherBtn.setOnClickListener {
+                rootPresenter.goToWeather()
+            }
         settingsBtn = view.settingsBTN
-        if(this::settingsBtn.isInitialized)
-        settingsBtn.setOnClickListener {
-            rootPresenter.goToSettings()
-        }
+        if (this::settingsBtn.isInitialized)
+            settingsBtn.setOnClickListener {
+                rootPresenter.goToSettings()
+            }
+
         return view
     }
 

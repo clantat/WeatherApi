@@ -76,6 +76,16 @@ dependencies {
     implementation 'ru.terrakok.cicerone:cicerone:5.1.1'
     // Material Components
     implementation 'com.google.android.material:material:1.2.1'
+    // Room database
+    def room_version = "2.3.0-alpha02"
 
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-rxjava3:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
 }
