@@ -24,8 +24,8 @@ class WeatherPresenter @Inject constructor(private val weatherInteractor: Weathe
 
     fun start() {
         disposable = weatherInteractor.getWeatherEntity()
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ weatherEntity ->
                 viewState.showDegrees("Температура в Ижевске ${weatherEntity.degrees}C")
                 viewState.showHumidity("Влажность ${weatherEntity.humidity}Ф")

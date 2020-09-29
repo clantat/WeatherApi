@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_UNSPECIFIED
 import com.clantat.test.R
 import com.clantat.test.core.App
 import com.clantat.test.presentation.presenters.RootPresenter
@@ -43,7 +46,7 @@ class RootFragment : MvpAppCompatFragment(), RootView {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
-
+        rootPresenter.getSettings()
     }
 
     override fun onCreateView(
@@ -77,6 +80,14 @@ class RootFragment : MvpAppCompatFragment(), RootView {
                 arguments = Bundle().apply {
                 }
             }
+    }
+
+    override fun setThemeMode(themeMode: Int) {
+        AppCompatDelegate.setDefaultNightMode(themeMode)
+    }
+
+    override fun error(message: String) {
+        Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
     }
 
 }

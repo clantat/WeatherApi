@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
@@ -70,17 +71,32 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
         changeThemeBtn.setOnClickListener {
             when (AppCompatDelegate.getDefaultNightMode()) {
                 MODE_NIGHT_NO -> {
+                    settingsPresenter.changeModeTheme(MODE_NIGHT_YES)
                     AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
                 }
                 MODE_NIGHT_YES -> {
+                    settingsPresenter.changeModeTheme(MODE_NIGHT_NO)
                     AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
                 }
                 AppCompatDelegate.MODE_NIGHT_UNSPECIFIED -> {
-                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+                    settingsPresenter.addModeTheme(MODE_NIGHT_YES)
                 }
             }
         }
         return view
+    }
+
+
+    override fun changeTheme(modeTheme: Int) {
+        AppCompatDelegate.setDefaultNightMode(modeTheme)
+    }
+
+    override fun showError(message: String) {
+        Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showResult(message: String) {
+        Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {
