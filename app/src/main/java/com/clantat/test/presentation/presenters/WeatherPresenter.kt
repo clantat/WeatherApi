@@ -1,5 +1,7 @@
 package com.clantat.test.presentation.presenters
 
+import androidx.appcompat.app.AppCompatDelegate
+import com.clantat.test.core.App
 import com.clantat.test.domain.interactors.WeatherInteractor
 import com.clantat.test.presentation.views.WeatherView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

@@ -32,7 +32,7 @@ class RootPresenter @Inject constructor(private val rootInteractor: RootInteract
         compositeDisposable.add(rootInteractor.getSettings()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { entity -> viewState.setThemeMode(entity.themeMode) }
+            .subscribe ({ entity -> viewState.setThemeMode(entity.themeMode) },{e-> e.stackTrace})
         )
     }
 

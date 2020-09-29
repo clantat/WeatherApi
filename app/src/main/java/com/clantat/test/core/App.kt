@@ -1,6 +1,10 @@
 package com.clantat.test.core
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import com.clantat.test.core.Constants.SP_SETTINGS
+import com.clantat.test.core.Constants.SP_SETTINGS_THEME_MODE
 import com.clantat.test.di.components.*
 import com.clantat.test.di.modules.AppModule
 import com.clantat.test.di.modules.RootModule
@@ -36,6 +40,8 @@ class App : Application() {
             .appModule(AppModule(this))
             .build()
             .apply { inject(this@App) }
+        AppCompatDelegate.setDefaultNightMode(getSharedPreferences(SP_SETTINGS,MODE_PRIVATE)
+            .getInt(SP_SETTINGS_THEME_MODE, MODE_NIGHT_NO))
     }
 
     fun plusMainActivityComponent(): MainActivityComponent {

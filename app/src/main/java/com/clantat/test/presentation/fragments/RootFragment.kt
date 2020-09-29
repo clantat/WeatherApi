@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_UNSPECIFIED
+import androidx.appcompat.app.AppCompatDelegate.*
 import com.clantat.test.R
 import com.clantat.test.core.App
 import com.clantat.test.presentation.presenters.RootPresenter
@@ -46,7 +46,8 @@ class RootFragment : MvpAppCompatFragment(), RootView {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
-        rootPresenter.getSettings()
+
+        //rootPresenter.getSettings()
     }
 
     override fun onCreateView(

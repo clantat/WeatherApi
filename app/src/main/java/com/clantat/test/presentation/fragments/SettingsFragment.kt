@@ -1,5 +1,6 @@
 package com.clantat.test.presentation.fragments
 
+import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,8 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import com.clantat.test.R
 import com.clantat.test.core.App
+import com.clantat.test.core.Constants
+import com.clantat.test.core.Constants.SP_SETTINGS_THEME_MODE
 import com.clantat.test.presentation.presenters.SettingsPresenter
 import com.clantat.test.presentation.views.SettingsView
 import kotlinx.android.synthetic.main.fragment_settings.view.*
@@ -64,22 +67,31 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
             MODE_NIGHT_YES -> {
                 changeThemeBtn.text = resources.getString(R.string.changeDarkTheme)
             }
-            AppCompatDelegate.MODE_NIGHT_UNSPECIFIED -> {
+            else -> {
                 changeThemeBtn.text = resources.getString(R.string.changeLightTheme)
             }
         }
         changeThemeBtn.setOnClickListener {
             when (AppCompatDelegate.getDefaultNightMode()) {
                 MODE_NIGHT_NO -> {
-                    settingsPresenter.changeModeTheme(MODE_NIGHT_YES)
+                    App.instance.getSharedPreferences(
+                        Constants.SP_SETTINGS,
+                        Application.MODE_PRIVATE
+                    ).edit().putInt(SP_SETTINGS_THEME_MODE,MODE_NIGHT_YES).apply()
                     AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
                 }
                 MODE_NIGHT_YES -> {
-                    settingsPresenter.changeModeTheme(MODE_NIGHT_NO)
+                    App.instance.getSharedPreferences(
+                        Constants.SP_SETTINGS,
+                        Application.MODE_PRIVATE
+                    ).edit().putInt(SP_SETTINGS_THEME_MODE,MODE_NIGHT_NO).apply()
                     AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
                 }
-                AppCompatDelegate.MODE_NIGHT_UNSPECIFIED -> {
-                    settingsPresenter.addModeTheme(MODE_NIGHT_YES)
+                else -> {
+                    App.instance.getSharedPreferences(
+                        Constants.SP_SETTINGS,
+                        Application.MODE_PRIVATE
+                    ).edit().putInt(SP_SETTINGS_THEME_MODE,MODE_NIGHT_NO).apply()
                 }
             }
         }
