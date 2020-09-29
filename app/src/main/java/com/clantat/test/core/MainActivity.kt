@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             app.cicerone.router.newRootScreen(RootScreen())
         }
+
     }
 
     override fun onResumeFragments() {

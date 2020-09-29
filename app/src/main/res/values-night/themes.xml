@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents">
+        <!-- DARK THEME -->
+        <item name="colorPrimaryDark">@color/colorDarkPrimaryDark</item>
+        <item name="colorAccent">@color/colorDarkAccent</item>
+        <item name="backgroundColor">@color/colorDarkBackground</item>
+        <item name="colorOnBackground">@color/colorDarkOnBackground</item>
+        <item name="colorSurface">@color/colorDarkSurface</item>
+        <item name="colorOnSurface">@color/colorDarkOnSurface</item>
+        <item name="colorPrimary">@color/colorDarkPrimary</item>
+        <item name="colorOnPrimary">@color/colorDarkOnPrimary</item>
+        <item name="colorSecondary">@color/colorDarkSecondary</item>
+        <item name="colorOnSecondary">@color/colorDarkOnSecondary</item>
+        <!--        <item name="colorPrimaryVariant"></item>-->
+
+
+    </style>
+</resources>

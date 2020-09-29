@@ -40,8 +40,14 @@ class App : Application() {
             .appModule(AppModule(this))
             .build()
             .apply { inject(this@App) }
-        AppCompatDelegate.setDefaultNightMode(getSharedPreferences(SP_SETTINGS,MODE_PRIVATE)
-            .getInt(SP_SETTINGS_THEME_MODE, MODE_NIGHT_NO))
+        settingsKit()
+    }
+
+    private fun settingsKit() {
+        AppCompatDelegate.setDefaultNightMode(
+            getSharedPreferences(SP_SETTINGS, MODE_PRIVATE)
+                .getInt(SP_SETTINGS_THEME_MODE, MODE_NIGHT_NO)
+        )
     }
 
     fun plusMainActivityComponent(): MainActivityComponent {
