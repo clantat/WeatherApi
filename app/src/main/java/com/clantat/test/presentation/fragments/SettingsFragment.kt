@@ -3,6 +3,7 @@ package com.clantat.test.presentation.fragments
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import android.util.TypedValue.COMPLEX_UNIT_PX
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,6 +61,10 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
         changeThemeBtn = view.changeThemeBtn
+        var fontSize:Float = App.instance.getSharedPreferences(
+            Constants.SP_SETTINGS,
+            Application.MODE_PRIVATE
+        ).getFloat(Constants.SP_SETTINGS_THEME_MODE,14.0f)
         when (AppCompatDelegate.getDefaultNightMode()) {
             MODE_NIGHT_NO -> {
                 changeThemeBtn.text = resources.getString(R.string.changeLightTheme)
@@ -94,6 +99,22 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
                     ).edit().putInt(SP_SETTINGS_THEME_MODE,MODE_NIGHT_NO).apply()
                 }
             }
+        }
+        view.decrease_btn.setOnClickListener {
+            fontSize-=2
+            view.scrollViewText.textSize = fontSize
+            App.instance.getSharedPreferences(
+                Constants.SP_SETTINGS,
+                Application.MODE_PRIVATE
+            ).edit().putFloat(SP_SETTINGS_THEME_MODE,fontSize).apply()
+        }
+        view.increase_btn.setOnClickListener {
+            fontSize+=2
+            view.scrollViewText.textSize = fontSize
+            App.instance.getSharedPreferences(
+                Constants.SP_SETTINGS,
+                Application.MODE_PRIVATE
+            ).edit().putFloat(SP_SETTINGS_THEME_MODE,fontSize).apply()
         }
         return view
     }

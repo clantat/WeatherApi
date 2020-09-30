@@ -11,4 +11,6 @@ object Constants {
     // SharedPreference
     const val SP_SETTINGS = "Settings"
     const val SP_SETTINGS_THEME_MODE = "themeMode"
+    const val SP_SETTINGS_FONT_SIZE = "fontSize"
+
 }

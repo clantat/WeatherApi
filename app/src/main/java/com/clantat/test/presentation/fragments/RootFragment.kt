@@ -1,16 +1,19 @@
 package com.clantat.test.presentation.fragments
 
+import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.*
 import com.clantat.test.R
 import com.clantat.test.core.App
+import com.clantat.test.core.Constants
 import com.clantat.test.presentation.presenters.RootPresenter
 import com.clantat.test.presentation.views.RootView
 import kotlinx.android.synthetic.main.fragment_root.view.*
@@ -25,6 +28,7 @@ class RootFragment : MvpAppCompatFragment(), RootView {
 
     private lateinit var weatherBtn: Button
     private lateinit var settingsBtn: Button
+    private lateinit var fsdf:TextView
 
     @Inject
     lateinit var presenterProvider: Provider<RootPresenter>
@@ -65,6 +69,10 @@ class RootFragment : MvpAppCompatFragment(), RootView {
             settingsBtn.setOnClickListener {
                 rootPresenter.goToSettings()
             }
+        view.hello_user_tv.textSize =  App.instance.getSharedPreferences(
+            Constants.SP_SETTINGS,
+            Application.MODE_PRIVATE
+        ).getFloat(Constants.SP_SETTINGS_THEME_MODE,14.0f)
 
         return view
     }
