@@ -3,7 +3,6 @@
     <style name="AppTheme" parent="Theme.MaterialComponents">
         <!-- DARK THEME -->
         <item name="colorPrimaryDark">@color/colorDarkPrimaryDark</item>
-        <item name="colorAccent">@color/colorDarkAccent</item>
         <item name="backgroundColor">@color/colorDarkBackground</item>
         <item name="colorOnBackground">@color/colorDarkOnBackground</item>
         <item name="colorSurface">@color/colorDarkSurface</item>

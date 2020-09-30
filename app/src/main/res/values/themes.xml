@@ -4,7 +4,6 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- LIGHT THEME -->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
         <item name="backgroundColor">@color/colorBackground</item>
         <item name="colorOnBackground">@color/colorOnBackground</item>
         <item name="colorSurface">@color/colorSurface</item>
