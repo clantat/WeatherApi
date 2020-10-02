@@ -1,48 +1,45 @@
 package com.clantat.test.presentation.presenters
 
-import com.clantat.test.data.provider.SettingsDatabaseProvider
 import com.clantat.test.domain.entities.SettingsEntity
 import com.clantat.test.domain.interactors.SettingsInteractor
 import com.clantat.test.presentation.views.SettingsView
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.*
 import moxy.MvpPresenter
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 class SettingsPresenter @Inject constructor(private val settingsInteractor: SettingsInteractor) :
-    MvpPresenter<SettingsView>() {
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    MvpPresenter<SettingsView>(), CoroutineScope {
+
+    private val job = Job()
+    override val coroutineContext: CoroutineContext = Dispatchers.Main + job
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         //viewState.requestContactsPermission()
     }
 
     fun changeModeTheme(mode: Int) {
-        compositeDisposable.add(
-            settingsInteractor.addSettings(SettingsEntity(1, mode))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ viewState.showResult("Saved") },
-                    { error -> viewState.showError("Cant save the theme: ${error.stackTrace}") })
-        )
-        viewState.changeTheme(mode)
-
+        launch {
+            withContext(Dispatchers.IO) {
+                settingsInteractor.addSettings(SettingsEntity(23, 324))
+            }
+            // TODO ввести проверку в котлине на сохранение данных в бд complitable в RXjava
+            viewState.showResult("Saved")
+        }
     }
 
     fun addModeTheme(mode: Int) {
-        compositeDisposable.add(
-            settingsInteractor.updateSettings(SettingsEntity(1, mode))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ viewState.showResult("Saved") },
-                    { error -> viewState.showError("Cant save the theme: ${error.stackTrace}") })
-        )
-        viewState.changeTheme(mode)
+        launch {
+            withContext(Dispatchers.IO) {
+                settingsInteractor.updateSettings(SettingsEntity(990, mode))
+            }
+            viewState.showResult("Saved")
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        compositeDisposable.dispose()
+        job.cancel()
     }
 }

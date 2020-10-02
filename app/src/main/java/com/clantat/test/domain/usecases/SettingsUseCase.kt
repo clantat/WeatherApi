@@ -3,16 +3,18 @@ package com.clantat.test.domain.usecases
 import com.clantat.test.domain.entities.SettingsEntity
 import com.clantat.test.domain.interactors.SettingsInteractor
 import com.clantat.test.domain.repositories.SettingsRepository
-import io.reactivex.rxjava3.core.Completable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class SettingsUseCase(private val settingsRepository: SettingsRepository):SettingsInteractor {
+class SettingsUseCase(private val settingsRepository: SettingsRepository) : SettingsInteractor {
 
-    override fun addSettings(settingsEntity: SettingsEntity): Completable {
-        return settingsRepository.addSettings(settingsEntity)
+    override suspend fun addSettings(settingsEntity: SettingsEntity) = withContext(Dispatchers.IO) {
+        settingsRepository.addSettings(settingsEntity)
     }
 
-    override fun updateSettings(settingsEntity: SettingsEntity): Completable {
-        return settingsRepository.updateSettings(settingsEntity)
-    }
+    override suspend fun updateSettings(settingsEntity: SettingsEntity) =
+        withContext(Dispatchers.IO) {
+            settingsRepository.updateSettings(settingsEntity)
+        }
 
 }

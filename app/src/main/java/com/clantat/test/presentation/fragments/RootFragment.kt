@@ -49,6 +49,7 @@ class RootFragment : MvpAppCompatFragment(), RootView {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
+        rootPresenter.getSettings()
     }
 
     override fun onCreateView(

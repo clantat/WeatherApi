@@ -85,6 +85,7 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
                         Constants.SP_SETTINGS,
                         Application.MODE_PRIVATE
                     ).edit().putInt(SP_SETTINGS_THEME_MODE, MODE_NIGHT_YES).apply()
+                    settingsPresenter.changeModeTheme(MODE_NIGHT_YES)
                     AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
                 }
                 MODE_NIGHT_YES -> {
@@ -92,13 +93,16 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
                         Constants.SP_SETTINGS,
                         Application.MODE_PRIVATE
                     ).edit().putInt(SP_SETTINGS_THEME_MODE, MODE_NIGHT_NO).apply()
+                    settingsPresenter.changeModeTheme(MODE_NIGHT_NO)
                     AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
                 }
                 else -> {
                     App.instance.getSharedPreferences(
                         Constants.SP_SETTINGS,
                         Application.MODE_PRIVATE
-                    ).edit().putInt(SP_SETTINGS_THEME_MODE, MODE_NIGHT_NO).apply()
+                    ).edit().putInt(SP_SETTINGS_THEME_MODE, MODE_NIGHT_YES).apply()
+                    settingsPresenter.addModeTheme(MODE_NIGHT_YES)
+                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
                 }
             }
         }

@@ -1,23 +1,24 @@
 package com.clantat.test.presentation.presenters
 
+import android.util.Log
 import com.clantat.test.core.App
 import com.clantat.test.core.SettingsScreen
 import com.clantat.test.core.WeatherScreen
 import com.clantat.test.domain.interactors.RootInteractor
 import com.clantat.test.presentation.views.RootView
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.*
 import moxy.MvpPresenter
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class RootPresenter @Inject constructor(private val rootInteractor: RootInteractor) : MvpPresenter<RootView>() {
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-
+class RootPresenter @Inject constructor(private val rootInteractor: RootInteractor) :
+    MvpPresenter<RootView>(), CoroutineScope {
+    private val job = Job()
+    override val coroutineContext: CoroutineContext = Dispatchers.IO + job
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         //viewState.requestContactsPermission()
+
     }
 
     fun goToWeather() {
@@ -29,15 +30,17 @@ class RootPresenter @Inject constructor(private val rootInteractor: RootInteract
     }
 
     fun getSettings() {
-        compositeDisposable.add(rootInteractor.getSettings()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({ entity -> viewState.setThemeMode(entity.themeMode) },{e-> e.stackTrace})
-        )
+        launch {
+            withContext(Dispatchers.IO) {
+                rootInteractor.getSettings().themeMode
+                Log.i("fsdf", "getSettings: " +                 rootInteractor.getSettings().id)
+                Log.i("fsdf", "getSettings: " +                 rootInteractor.getSettings().themeMode)
+            }
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        compositeDisposable.dispose()
+        job.cancel()
     }
 }
