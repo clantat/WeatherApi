@@ -3,7 +3,7 @@ package com.clantat.test.presentation.fragments
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import android.util.TypedValue.COMPLEX_UNIT_PX
+import android.util.TypedValue.COMPLEX_UNIT_SP
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import com.clantat.test.R
 import com.clantat.test.core.App
 import com.clantat.test.core.Constants
+import com.clantat.test.core.Constants.SP_SETTINGS_FONT_SIZE
 import com.clantat.test.core.Constants.SP_SETTINGS_THEME_MODE
 import com.clantat.test.presentation.presenters.SettingsPresenter
 import com.clantat.test.presentation.views.SettingsView
@@ -61,10 +62,11 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
         changeThemeBtn = view.changeThemeBtn
-        var fontSize:Float = App.instance.getSharedPreferences(
+        var fontSize: Float = App.instance.getSharedPreferences(
             Constants.SP_SETTINGS,
             Application.MODE_PRIVATE
-        ).getFloat(Constants.SP_SETTINGS_THEME_MODE,14.0f)
+        ).getFloat(SP_SETTINGS_FONT_SIZE, resources.getDimension(R.dimen.default_font_size))
+        view.scrollViewText.setTextSize(COMPLEX_UNIT_SP,fontSize)
         when (AppCompatDelegate.getDefaultNightMode()) {
             MODE_NIGHT_NO -> {
                 changeThemeBtn.text = resources.getString(R.string.changeLightTheme)
@@ -82,39 +84,39 @@ class SettingsFragment : MvpAppCompatFragment(), SettingsView {
                     App.instance.getSharedPreferences(
                         Constants.SP_SETTINGS,
                         Application.MODE_PRIVATE
-                    ).edit().putInt(SP_SETTINGS_THEME_MODE,MODE_NIGHT_YES).apply()
+                    ).edit().putInt(SP_SETTINGS_THEME_MODE, MODE_NIGHT_YES).apply()
                     AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
                 }
                 MODE_NIGHT_YES -> {
                     App.instance.getSharedPreferences(
                         Constants.SP_SETTINGS,
                         Application.MODE_PRIVATE
-                    ).edit().putInt(SP_SETTINGS_THEME_MODE,MODE_NIGHT_NO).apply()
+                    ).edit().putInt(SP_SETTINGS_THEME_MODE, MODE_NIGHT_NO).apply()
                     AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
                 }
                 else -> {
                     App.instance.getSharedPreferences(
                         Constants.SP_SETTINGS,
                         Application.MODE_PRIVATE
-                    ).edit().putInt(SP_SETTINGS_THEME_MODE,MODE_NIGHT_NO).apply()
+                    ).edit().putInt(SP_SETTINGS_THEME_MODE, MODE_NIGHT_NO).apply()
                 }
             }
         }
         view.decrease_btn.setOnClickListener {
-            fontSize-=2
-            view.scrollViewText.textSize = fontSize
+            fontSize -= 2
+            view.scrollViewText.setTextSize(COMPLEX_UNIT_SP,fontSize)
             App.instance.getSharedPreferences(
                 Constants.SP_SETTINGS,
                 Application.MODE_PRIVATE
-            ).edit().putFloat(SP_SETTINGS_THEME_MODE,fontSize).apply()
+            ).edit().putFloat(SP_SETTINGS_FONT_SIZE, fontSize).apply()
         }
         view.increase_btn.setOnClickListener {
-            fontSize+=2
-            view.scrollViewText.textSize = fontSize
+            fontSize += 2
+            view.scrollViewText.setTextSize(COMPLEX_UNIT_SP,fontSize)
             App.instance.getSharedPreferences(
                 Constants.SP_SETTINGS,
                 Application.MODE_PRIVATE
-            ).edit().putFloat(SP_SETTINGS_THEME_MODE,fontSize).apply()
+            ).edit().putFloat(SP_SETTINGS_FONT_SIZE, fontSize).apply()
         }
         return view
     }
