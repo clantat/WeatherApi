@@ -15,7 +15,8 @@ class DatabaseModule {
     @Singleton
     @Provides
     fun provideSettingsDatabase(context: Context): SettingsDatabase{
-        return Room.databaseBuilder(context,SettingsDatabase::class.java,DB_NAME).build()
+        return Room.databaseBuilder(context,SettingsDatabase::class.java,DB_NAME)
+            .build()
     }
     @Singleton
     @Provides

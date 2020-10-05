@@ -13,4 +13,8 @@ class SettingsGateway(private val settingsDatabaseProvider: SettingsDatabaseProv
     override suspend fun updateSettings(settingsEntity: SettingsEntity) {
         settingsDatabaseProvider.updateSettings(settingsEntity)
     }
+
+    override suspend fun getSettings(): SettingsEntity {
+        return settingsDatabaseProvider.getSettings()
+    }
 }

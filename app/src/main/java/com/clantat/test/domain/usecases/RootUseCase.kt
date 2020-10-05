@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class RootUseCase(private val rootRepository: RootRepository) : RootInteractor {
-    override  suspend fun getSettings(): SettingsEntity = withContext(Dispatchers.IO) {
-        rootRepository.getSettings()
+    override  suspend fun getSettings(): SettingsEntity {
+        return rootRepository.getSettings()
     }
 }

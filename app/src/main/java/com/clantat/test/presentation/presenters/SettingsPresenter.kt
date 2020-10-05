@@ -1,5 +1,6 @@
 package com.clantat.test.presentation.presenters
 
+import android.util.Log
 import com.clantat.test.domain.entities.SettingsEntity
 import com.clantat.test.domain.interactors.SettingsInteractor
 import com.clantat.test.presentation.views.SettingsView
@@ -22,18 +23,23 @@ class SettingsPresenter @Inject constructor(private val settingsInteractor: Sett
     fun changeModeTheme(mode: Int) {
         launch {
             withContext(Dispatchers.IO) {
-                settingsInteractor.addSettings(SettingsEntity(23, 324))
+                settingsInteractor.addSettings(SettingsEntity(23, 1488))
+                settingsInteractor.updateSettings(SettingsEntity(23, 1488))
             }
-            // TODO ввести проверку в котлине на сохранение данных в бд complitable в RXjava
+
+            // TODO ввести проверку в котлине на сохранение данных в бд complitable в RXjava Возможно поможет deffered<Unit>
+            viewState.changeTheme(mode)
             viewState.showResult("Saved")
+
         }
     }
 
     fun addModeTheme(mode: Int) {
         launch {
             withContext(Dispatchers.IO) {
-                settingsInteractor.updateSettings(SettingsEntity(990, mode))
+                settingsInteractor.addSettings(SettingsEntity(23, mode))
             }
+            viewState.changeTheme(mode)
             viewState.showResult("Saved")
         }
     }

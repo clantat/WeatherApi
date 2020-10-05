@@ -6,7 +6,7 @@ object Constants {
 
     // DATABASE
     const val DB_NAME = "settings_db.db"
-    const val DB_VERSION = 1
+    const val DB_VERSION = 2
 
     // SharedPreference
     const val SP_SETTINGS = "Settings"

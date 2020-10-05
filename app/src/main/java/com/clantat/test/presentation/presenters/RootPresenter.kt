@@ -32,9 +32,9 @@ class RootPresenter @Inject constructor(private val rootInteractor: RootInteract
     fun getSettings() {
         launch {
             withContext(Dispatchers.IO) {
-                rootInteractor.getSettings().themeMode
-                Log.i("fsdf", "getSettings: " +                 rootInteractor.getSettings().id)
-                Log.i("fsdf", "getSettings: " +                 rootInteractor.getSettings().themeMode)
+                Log.i("fsdf", "getSettings: " +                 rootInteractor.getSettings().toString())
+                Log.i("fsdf", "getSettings: " +                 rootInteractor.getSettings())
+
             }
         }
     }
