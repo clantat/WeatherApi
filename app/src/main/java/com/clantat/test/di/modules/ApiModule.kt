@@ -67,7 +67,7 @@ class ApiModule {
     @WeatherScope
     @Provides
     fun provideWeatherReceiver(
-        @Named("GismeteoApiRX") gismeteoApi: GismeteoApi,
+        @Named("GismeteoApiCoroutines") gismeteoApi: GismeteoApi,
         context: Context
     ): WeatherReceiver {
         return WeatherGismeteoApi(gismeteoApi, context.getString(R.string.GismeteoApiKey))

@@ -1,8 +1,6 @@
 package com.clantat.test.data.retrofit
 
 import io.reactivex.rxjava3.core.Single
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -13,7 +11,7 @@ interface GismeteoApi {
     ): Single<WeatherResponse>
 
     @GET("data/2.5/forecast?q=izhevsk,ru&lang=ru&units=metric")
-    fun searchCoroutine(
+    suspend fun searchCoroutine(
         @Query("appid") apiKey: String
-    ): Flow <WeatherResponse>
+    ): WeatherResponse
 }
