@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+<!--LIGHT THEME-->
+    <color name="colorPrimary">#00bcd4</color>
+    <color name="colorPrimaryDark">#008ba3</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#000000</color>
+    <color name="colorOnPrimary">#000000</color>
+    <color name="colorSecondary">#b0bec5</color>
+    <color name="colorOnSecondary">#000000</color>
+    <color name="colorBackground">#ffffff</color>
+    <color name="colorOnBackground">#000000</color>
+<!--DARK THEME-->
+    <color name="colorDarkPrimary">#d496ed</color>
+    <color name="colorDarkPrimaryDark">#9c64a6</color>
+    <color name="colorDarkSurface">#121212</color>
+    <color name="colorDarkOnSurface">#ffffff</color>
+    <color name="colorDarkOnPrimary">#000000</color>
+    <color name="colorDarkSecondary">#b0bec5</color>
+    <color name="colorDarkOnSecondary">#000000</color>
+    <color name="colorDarkBackground">#121212</color>
+    <color name="colorDarkOnBackground">#ffffff</color>
+
 </resources>

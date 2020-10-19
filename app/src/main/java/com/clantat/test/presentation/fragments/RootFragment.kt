@@ -1,13 +1,18 @@
 package com.clantat.test.presentation.fragments
 
+import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.clantat.test.R
 import com.clantat.test.core.App
+import com.clantat.test.core.Constants
 import com.clantat.test.presentation.presenters.RootPresenter
 import com.clantat.test.presentation.views.RootView
 import kotlinx.android.synthetic.main.fragment_root.view.*
@@ -17,6 +22,7 @@ import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
+private const val TAG: String = "RootFragment"
 
 class RootFragment : MvpAppCompatFragment(), RootView {
 
@@ -43,7 +49,7 @@ class RootFragment : MvpAppCompatFragment(), RootView {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
-
+        rootPresenter.getSettings()
     }
 
     override fun onCreateView(
@@ -61,6 +67,15 @@ class RootFragment : MvpAppCompatFragment(), RootView {
             settingsBtn.setOnClickListener {
                 rootPresenter.goToSettings()
             }
+        view.hello_user_tv.setTextSize(
+            TypedValue.COMPLEX_UNIT_SP, App.instance.getSharedPreferences(
+                Constants.SP_SETTINGS,
+                Application.MODE_PRIVATE
+            ).getFloat(
+                Constants.SP_SETTINGS_FONT_SIZE,
+                resources.getDimension(R.dimen.default_font_size)
+            )
+        )
 
         return view
     }
@@ -77,6 +92,14 @@ class RootFragment : MvpAppCompatFragment(), RootView {
                 arguments = Bundle().apply {
                 }
             }
+    }
+
+    override fun setThemeMode(themeMode: Int) {
+        AppCompatDelegate.setDefaultNightMode(themeMode)
+    }
+
+    override fun error(message: String) {
+        Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
     }
 
 }

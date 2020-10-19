@@ -6,4 +6,6 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface RootView : MvpView {
+    fun setThemeMode(themeMode: Int)
+    fun error(message:String)
 }

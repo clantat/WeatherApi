@@ -2,8 +2,6 @@ package com.clantat.test.core
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import com.clantat.test.R
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject

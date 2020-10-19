@@ -1,9 +1,9 @@
-package com.clantat.test.data.provider
+package com.clantat.test.domain.repositories
 
 import com.clantat.test.domain.entities.SettingsEntity
 
-interface SettingsDatabaseProvider {
-    suspend fun getSettings(): SettingsEntity
+interface SettingsRepository {
     suspend fun addSettings(settingsEntity: SettingsEntity)
     suspend fun updateSettings(settingsEntity: SettingsEntity)
+    suspend fun getSettings():SettingsEntity
 }
